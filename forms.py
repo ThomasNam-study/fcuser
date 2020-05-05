@@ -8,3 +8,8 @@ class RegisterForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired(), EqualTo('repassword')])
     repassword = StringField('repassword', validators=[DataRequired()])
+
+
+class LoginForm(FlaskForm):
+    userid = StringField('userid', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired()])

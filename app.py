@@ -2,12 +2,20 @@ import os
 from flask import Flask, request, redirect
 from flask import render_template
 
-from forms import RegisterForm
+from forms import RegisterForm, LoginForm
 from model import db, Fcuser
 from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        pass
+
+    return render_template("login.html", form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
