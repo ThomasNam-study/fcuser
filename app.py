@@ -8,6 +8,7 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -17,6 +18,14 @@ def login():
         pass
 
     return render_template("login.html", form=form)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('userid', None)
+
+    return redirect("/")
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -38,7 +47,6 @@ def register():
 
 @app.route('/')
 def hello_world():
-
     userid = session.get('userid', None)
 
     return render_template("hello.html", userid=userid)
