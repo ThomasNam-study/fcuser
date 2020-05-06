@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, session
 from flask import render_template
 
 from forms import RegisterForm, LoginForm
@@ -13,6 +13,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+        session['userid'] = form.data.get('userid')
         pass
 
     return render_template("login.html", form=form)
@@ -37,7 +38,10 @@ def register():
 
 @app.route('/')
 def hello_world():
-    return render_template("hello.html")
+
+    userid = session.get('userid', None)
+
+    return render_template("hello.html", userid=userid)
 
 
 if __name__ == '__main__':
